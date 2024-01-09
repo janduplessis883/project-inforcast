@@ -7,15 +7,9 @@ import datetime
 # from streamlit_extras.metric_cards import style_metric_cards
 # from streamlit_extras.stoggle import stoggle
 
-from main import *
+from inforcast.main import *
 
 st.set_page_config(page_title="VaxPlanner 360", page_icon="💉", layout="wide")
-
-# style_metric_cards(
-#     background_color="#f2f2f2",  # Background color of the card      # Color of the text           # Font size       # Border radius for the card            # Padding inside the card
-#     border_left_color="#d7ab42",
-#     box_shadow=False # Margin around the card
-# )
 
 
 html = """
@@ -29,7 +23,7 @@ html = """
     font-weight: bold;
 }
 </style>
-<div class="gradient-text">VaxPlanner 360</div>
+<div class="gradient-text">INForcast</div>
 """
 html2 = """
 <style>
@@ -41,9 +35,7 @@ html2 = """
     font-size: 28px;
     font-weight: bold;
 }
-</style>
-<div class="gradient-text">Historic Inf vacc data</div>
-"""
+</style><div class="gradient-text">Historic Influenza vaccine data</div>"""
 html3 = """
 <style>
 .gradient-text {
@@ -53,9 +45,20 @@ html3 = """
     color: transparent;
     font-size: 28px;
     font-weight: bold;
-}
 </style>
-<div class="gradient-text">Inf vacc data - 23/24</div>
+<div class="gradient-text">Influenza vaccine data - 23/24</div>
+"""
+html4 = """
+<style>
+.gradient-text {
+    background: linear-gradient(45deg, #284d74, #d8ad45, #b2d9db, #e16d33);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 28px;
+    font-weight: bold;
+</style>
+<div class="gradient-text">Quickstart</div>
 """
 # Render the HTML in the Streamlit app
 st.markdown(html, unsafe_allow_html=True)
@@ -87,10 +90,10 @@ with col1:
 
             # Creating a slider
             selected_year = st.slider(
-                'Select a year', 
-                min_value=2000, 
-                max_value=current_year, 
-                value=(2000, current_year)
+                "Select a year",
+                min_value=2000,
+                max_value=current_year,
+                value=(2000, current_year),
             )
 
             # 4. Load the data based on the selected 'location' ID
@@ -119,10 +122,9 @@ with col3:
         col2.metric(label="18 - 64 yrs", value=str(counts[1]), delta=str(dalta[1]))
         col3.metric(label="Over 65 yrs", value=str(counts[2]), delta=str(dalta[2]))
     else:
+        st.markdown(html4, unsafe_allow_html=True)
         st.markdown(
-            """### Quickstart Guide
-                        
-**Welcome to VaxPlanner 360**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
+            """**Welcome to VaxPlanner 360**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
 
 **Ready to get started?** Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
 
@@ -135,7 +137,7 @@ To prepare your data, download the [SystmOne Report file here and import to Syst
 
 Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
 
-:[yellow](Important):
+**Important**:
 >Please **update the format** of the 2 date columns, `Event date` and ` Date of Birth` as follows: 
 - Open the csv in Excel, select both columns and right click **Format Cells** 
 - Select CUSTOM and update the date format to `dd-mmm-yyyy`. Note you will need to type this as it is not selectable from the dorp-down list.
@@ -144,9 +146,3 @@ To initiate the prediction, enter your practice's ODE code into the designated '
 
 Embrace a smarter approach to vaccination planning with VaxPlanner 360."""
         )
-        report_path = "../images/VaxPlanner360 - SystmOne Search.rpt"
-        st.download_button("Download SytmOne Report", report_path)
-
-        # stoggle("Contact Me:",
-        #         "Further Text here"
-        # )

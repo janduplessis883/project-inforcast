@@ -5,8 +5,8 @@ from colorama import Fore, init, Back
 
 init(autoreset=True)
 
-from vaccine_predictor.params import LOCAL_GIT_REPO
-from vaccine_predictor.utils import time_it
+from inforcast.params import LOCAL_GIT_REPO
+from inforcast.utils import time_it
 
 repo_path = LOCAL_GIT_REPO
 

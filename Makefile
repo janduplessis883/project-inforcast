@@ -17,7 +17,7 @@ test:
 
 # Specify package name
 lint:
-	@black vaccine_predictor/
+	@black inforcast/
 
 app:
 	@streamlit run inforcast/app.py
