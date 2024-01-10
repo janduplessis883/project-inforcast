@@ -25,7 +25,9 @@ col1, col2, col3 = st.columns([1, 0.1, 3])
 data = None
 with col1:
     # Render the HTML in the Streamlit app
-    st.markdown(html, unsafe_allow_html=True)
+    st.image(
+        "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log.png?raw=true"
+    )
     # Toggle checkbox
     toggle = st.checkbox("Quick Start")
 
