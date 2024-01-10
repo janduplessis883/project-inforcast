@@ -9,7 +9,8 @@ Upload your vaccination data, using the upload form. Data can be from SystmOne o
 
 Download the `csv` template below as a guide. 
 
-**Very important** is the format of Event date and Date of Birth, they both need to be in the format 
+### Very important
+The format of **Event date** and **Date of Birth**, they both need to be in the format 
 
 **dd-mmm-yyyy** 
 
