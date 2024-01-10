@@ -34,18 +34,9 @@ with col1:
     # Check if the toggle is on or off
     if toggle:
         st.markdown(html4, unsafe_allow_html=True)
-        st.markdown(quickguide)
-        st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info2.png?raw=true",
-            width=300,
-        )
-        st.markdown(html5)
-        st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info3.png?raw=true",
-            width=360,
-        )
-        st.markdown(html6)
-        st.code(guide_code1)
+        # Reading md file from GitHub
+        markdown_content = read_markdown_file("your_markdown_file.md")
+        st.markdown(markdown_content, unsafe_allow_html=True)
 
     # Checkbox to load sample data
     if st.checkbox("Load Sample Data"):
