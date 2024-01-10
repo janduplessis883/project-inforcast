@@ -7,3 +7,4 @@ matplotlib
 colorama
 darts
 ipywidgets
+requests
