@@ -39,7 +39,12 @@ with col1:
             "https://github.com/janduplessis883/project-inforcast/blob/master/images/info2.png?raw=true",
             width=320,
         )
-        st.markdown(html5, unsafe_allow_html=True)
+        st.markdown(html5)
+        st.image(
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info3.png?raw=true",
+            width=320,
+        )
+        st.markdown(html6)
         st.code(guide_code1)
 
     # Checkbox to load sample data

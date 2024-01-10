@@ -57,15 +57,16 @@ quickguide = """Welcome to **INForcast**, never order too many vaccines again!
 
 **INForcast will help you forcast your next Influenza vaccine order**.
 
-Leveraging advanced TimeSeries modeling, the app delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes."""
+Leveraging advanced TimeSeries modeling, the app delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
+Use our **trained model** to forcast your vaccination requirement, or train the model with your **own data**."""
 
 
 html5 = """**Ready to get started?** 
-    Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
-    To prepare your data, download the [SystmOne Report file here and import to SystmOne Clinical Reporting](https://github.com/janduplessis883/project-vaxplanner-360/blob/master/images/VaxPlanner360%20-%20SystmOne%20Search.rpt) and breakdown the results into the following categories: 
-    
+    Upload your vaccination data, using the upload form. Data can be from SystmOne or Emis, as long as it is in the right format. [Download CSV templete](https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/inforcast/sampledata/csv_template.csv).
+    Download the [SystmOne Report Template](https://github.com/janduplessis883/project-inforcast/blob/master/images/INForcast-SystmOne-Search.rpt), import it to SystmOne Clinical Reporting and breakdown your search results by:"""
 
-    Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
+
+html6 = """Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
 
     **Important**:
     >Please **update the format** of the 2 date columns, `Event date` and ` Date of Birth` as follows: 
