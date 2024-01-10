@@ -9,7 +9,7 @@ import datetime
 
 from main import *
 
-st.set_page_config(page_title="VaxPlanner 360", page_icon="💉", layout="wide")
+st.set_page_config(page_title="INForcast", layout="wide")
 
 
 html = """
@@ -68,7 +68,8 @@ col1, col2, col3 = st.columns([1, 0.2, 3])
 
 with col1:
     if st.checkbox("Load Sample Data"):
-        data = pd.read_csv("sampledata/sampledata.csv")
+        url = "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/inforcast/sampledata/sampledata.csv"
+        data = pd.read_csv(url)
         data = process_dataframe(data)
         data = update_location(data)
 
