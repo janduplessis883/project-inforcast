@@ -195,3 +195,8 @@ def plot_age_groups(children_under_over_list, max_ylim):
     # Adjust the layout and display the plot
     plt.tight_layout()
     st.pyplot(fig)
+
+
+def read_markdown_file(markdown_file):
+    with open(markdown_file, "r") as file:
+        return file.read()

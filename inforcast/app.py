@@ -37,12 +37,12 @@ with col1:
         st.markdown(quickguide)
         st.image(
             "https://github.com/janduplessis883/project-inforcast/blob/master/images/info2.png?raw=true",
-            width=320,
+            width=300,
         )
         st.markdown(html5)
         st.image(
             "https://github.com/janduplessis883/project-inforcast/blob/master/images/info3.png?raw=true",
-            width=320,
+            width=360,
         )
         st.markdown(html6)
         st.code(guide_code1)
