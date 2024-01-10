@@ -142,6 +142,11 @@ with col3:
         )
 
     else:
+        st.image(
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inf_virus.png?raw=true",
+            caption="INForcast",
+            use_column_width=True,
+        )
         st.markdown(html4, unsafe_allow_html=True)
         st.markdown("Upload your CSV file or select sample data.")
         st.markdown(
