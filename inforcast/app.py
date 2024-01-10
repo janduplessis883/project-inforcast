@@ -67,6 +67,11 @@ st.markdown(html, unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 0.2, 3])
 
 with col1:
+    if st.checkbox("Load Sample Data"):
+        data = pd.read_csv("sampledata/sampledata.csv")
+        data = process_dataframe(data)
+        data = update_location(data)
+
     # Set up the file uploader widget
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
