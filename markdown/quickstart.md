@@ -22,9 +22,7 @@ Date of Birth
 Patient Count
 ```
 
-[Download CSV templete](https://github.com/janduplessis883/project-inforcast/blob/master/inforcast/sampledata/csv_template.csv)
-
-[SystmOne Report Template](https://github.com/janduplessis883/project-inforcast/blob/master/images/INForcast-SystmOne-Search.rpt)
+[Download CSV templete](https://github.com/janduplessis883/project-inforcast/blob/master/inforcast/sampledata/csv_template.csv)<BR>[SystmOne Report Template](https://github.com/janduplessis883/project-inforcast/blob/master/images/INForcast-SystmOne-Search.rpt)
 
 **Using Pre-Trained Model**
 
