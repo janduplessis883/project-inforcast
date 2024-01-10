@@ -26,6 +26,15 @@ data = None
 with col1:
     # Render the HTML in the Streamlit app
     st.markdown(html, unsafe_allow_html=True)
+    # Toggle checkbox
+    toggle = st.checkbox("Quick Start")
+
+    # Check if the toggle is on or off
+    if toggle:
+        st.markdown(html4, unsafe_allow_html=True)
+        st.markdown(quickguide)
+        st.code(guide_code1)
+
     # Checkbox to load sample data
     if st.checkbox("Load Sample Data"):
         url = "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/inforcast/sampledata/sampledata.csv"
@@ -94,14 +103,6 @@ with col3:
 
     else:
         st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-main.png?raw=true",
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-2.png?raw=true",
             use_column_width=True,
         )
-        # Toggle checkbox
-        toggle = st.checkbox("Quick Start - never overorder again.")
-
-        # Check if the toggle is on or off
-        if toggle:
-            st.markdown(html4, unsafe_allow_html=True)
-            st.markdown(quickguide)
-            st.code(guide_code1)
