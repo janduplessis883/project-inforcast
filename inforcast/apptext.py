@@ -55,7 +55,7 @@ html4 = """
 
 quickguide = """Welcome to **INForcast**, never order too many vaccines again! 
 
-**INForcast will help you forcast your next Influenze vaccine order**.
+**INForcast will help you forcast your next Influenza vaccine order**.
 
 Leveraging advanced TimeSeries modeling, the app delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes."""
 
