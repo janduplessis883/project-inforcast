@@ -63,72 +63,87 @@ html4 = """
 # Render the HTML in the Streamlit app
 st.markdown(html, unsafe_allow_html=True)
 
+# Define current year globally
+current_year = datetime.datetime.now().year
+
 # You can use columns to further utilize the wide layout
 col1, col2, col3 = st.columns([1, 0.2, 3])
 
+data = None
 with col1:
+    # Checkbox to load sample data
     if st.checkbox("Load Sample Data"):
         url = "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/inforcast/sampledata/sampledata.csv"
         data = pd.read_csv(url)
         data = process_dataframe(data)
         data = update_location(data)
-
-    # Set up the file uploader widget
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-
-    if uploaded_file is not None:
-        # To read file as string:
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        data = pd.read_csv(stringio)
-        data = process_dataframe(data)
-        if not data.empty:
+    else:
+        # Only display the file uploader if sample data is not selected
+        uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+        if uploaded_file is not None:
+            stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+            data = pd.read_csv(stringio)
+            data = process_dataframe(data)
             data = update_location(data)
-            # Assuming 'location' is the column name containing the IDs
-            location_counts = data["location"].value_counts()
-            most_frequent_location = location_counts.idxmax()
 
-            # Create a selectbox with the most frequent location as the default
-            selected_location = st.selectbox(
-                "Select a location:",
-                options=location_counts.index,
-                index=location_counts.index.get_loc(most_frequent_location),
-            )
+# Rest of the code for processing and plotting
+if data is not None:
+    with col1:
+        # Assuming 'location' is the column name containing the IDs
+        location_counts = data["location"].value_counts()
+        most_frequent_location = location_counts.idxmax()
 
-            # Creating a slider
-            selected_year = st.slider(
-                "Select a year",
-                min_value=2000,
-                max_value=current_year,
-                value=(2000, current_year),
-            )
+        # Create a selectbox with the most frequent location as the default
+        selected_location = st.selectbox(
+            "Select a location:",
+            options=location_counts.index,
+            index=location_counts.index.get_loc(most_frequent_location),
+        )
 
-            # 4. Load the data based on the selected 'location' ID
-            # Filter the DataFrame based on the selected location ID
-            filtered_data = data[data["location"] == selected_location]
+        # Creating a slider
+        selected_year = st.slider(
+            "Select a year",
+            min_value=2000,
+            max_value=current_year,
+            value=(2000, current_year),
+        )
+
+        # Filter the DataFrame based on the selected location ID
+        filtered_data = data[data["location"] == selected_location]
 
         df_list = age_groups(filtered_data)
         counts = count_last_year(filtered_data)
-        dalta = count_previous_year(filtered_data)
-    else:
-        st.warning("Upload your CSV file.")
+        previous_count = count_previous_year(filtered_data)
 
 with col2:
     st.write()
+
+# Check if df_list is available and valid for plotting
 with col3:
-    # Check if df_list is available and valid for plotting
-    if uploaded_file is not None and "df_list" in locals():
+    if data is not None and "df_list" in locals():
         st.markdown(html2, unsafe_allow_html=True)
         plot_age_groups(df_list, df_list[-1]["count"].max())
         current_year = datetime.datetime.now().year
         previous_year = int(current_year) - 1
+
         st.markdown(html3, unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
 
-        col1.metric(label="Children ", value=str(counts[0]), delta=str(dalta[0]))
-        col2.metric(label="18 - 64 yrs", value=str(counts[1]), delta=str(dalta[1]))
-        col3.metric(label="Over 65 yrs", value=str(counts[2]), delta=str(dalta[2]))
+        col1.metric(
+            label="Children (< 18 yrs)",
+            value=str(counts[0]),
+            delta=str(previous_count[0]),
+        )
+        col2.metric(
+            label="18 - 64 yrs", value=str(counts[1]), delta=str(previous_count[1])
+        )
+        col3.metric(
+            label="Over 65 yrs", value=str(counts[2]), delta=str(previous_count[2])
+        )
+
     else:
         st.markdown(html4, unsafe_allow_html=True)
+        st.markdown("Upload your CSV file or select sample data.")
         st.markdown(
             """**Welcome to VaxPlanner 360**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
 
