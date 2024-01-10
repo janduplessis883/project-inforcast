@@ -141,13 +141,13 @@ def age_histplot(data):
 
     # Plot each series in a different subplot
     sns.histplot(children_series, kde=True, ax=axes[0], color="#d59c0d")
-    axes[0].set_title("Children Age Range")
+    axes[0].set_title("Children - Age Histogram")
 
     sns.histplot(under_series, kde=True, ax=axes[1], color="#d59c0d")
-    axes[1].set_title("18 - 64 yrs Age Range")
+    axes[1].set_title("18 - 64 yrs - Age Histogram")
 
     sns.histplot(over_series, kde=True, ax=axes[2], color="#d59c0d")
-    axes[2].set_title("Over 65 Age Range")
+    axes[2].set_title("Over 65yrs - Age Histogram")
 
     # Customize each plot in the loop
     for ax in axes:
@@ -189,7 +189,7 @@ def plot_age_groups(children_under_over_list, max_ylim):
         ax.spines["left"].set_visible(False)
         # Set y-axis limits to 0 and 140
         ax.set_ylim(0, max_ylim - 40)
-        ax.set_xlabel("Date")
+        ax.set_xlabel("")
         ax.set_ylabel("Vaccine Count")
 
     # Adjust the layout and display the plot
