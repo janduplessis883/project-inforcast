@@ -33,6 +33,12 @@ with col1:
     if toggle:
         st.markdown(html4, unsafe_allow_html=True)
         st.markdown(quickguide)
+        st.image(
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info1.png?raw=true",
+            width=250,
+        )
+        st.markdown(html5, unsafe_allow_html=True)
+        st.markdown(quickguide)
         st.code(guide_code1)
 
     # Checkbox to load sample data

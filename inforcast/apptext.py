@@ -20,7 +20,7 @@ html2 = """
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
 }
 </style><div class="gradient-text">Historic Influenza vacc data (2000-2024)</div>"""
@@ -33,7 +33,7 @@ html3 = """
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
 </style>
 <div class="gradient-text">Inf vacc Totals - 23/24</div>
@@ -47,14 +47,20 @@ html4 = """
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
 </style>
 <div class="gradient-text">Quick Start Guide</div>
 """
 
-quickguide = """**Welcome to INForcast**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
-    **Ready to get started?** 
+quickguide = """Welcome to **INForcast**, never order too many vaccines again! 
+
+**INForcast will help you forcast your next Influenze vaccine order**.
+
+Leveraging advanced TimeSeries modeling, the app delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes."""
+
+
+html5 = """**Ready to get started?** 
     Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
     To prepare your data, download the [SystmOne Report file here and import to SystmOne Clinical Reporting](https://github.com/janduplessis883/project-vaxplanner-360/blob/master/images/VaxPlanner360%20-%20SystmOne%20Search.rpt) and breakdown the results into the following categories: 
     
