@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import datetime
 
-from inforcast.params import *
-from inforcast.utils import *
+from params import *
+from utils import *
 
 
 def update_location(df):
