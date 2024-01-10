@@ -23,7 +23,7 @@ html2 = """
     font-size: 28px;
     font-weight: bold;
 }
-</style><div class="gradient-text">Historic Influenza vaccine data</div>"""
+</style><div class="gradient-text">Historic Influenza vacc data (2000-current)</div>"""
 
 
 html3 = """

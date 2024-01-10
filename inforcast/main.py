@@ -174,7 +174,9 @@ def plot_age_groups(children_under_over_list, max_ylim):
 
     # Loop through each subplot and plot the data
     for ax, data, title in zip(
-        axes, children_under_over_list, ["Children", "18 - 64", "Over 65"]
+        axes,
+        children_under_over_list,
+        ["Children (< 18 yrs)", "18 - 64 yrs", "Over 65 yrs"],
     ):
         sns.lineplot(data=data, x=data.index, y="count", ax=ax, color="#184e77")
         ax.set_title(title)
