@@ -112,4 +112,5 @@ with col3:
         st.image(
             "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-2.png?raw=true",
             use_column_width=True,
+            caption="GitHub: janduplessis883",
         )
