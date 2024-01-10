@@ -3,77 +3,33 @@ import pandas as pd
 from io import StringIO
 import time
 import datetime
-
-# from streamlit_extras.metric_cards import style_metric_cards
-# from streamlit_extras.stoggle import stoggle
+import matplotlib.pyplot as plt
 
 from main import *
+from apptext import *
 
 st.set_page_config(page_title="INForcast", layout="wide")
 
 
-html = """
-<style>
-.gradient-text {
-    background: linear-gradient(45deg, #284d74, #d8ad45, #b2d9db, #e16d33);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 48px;
-    font-weight: bold;
-}
-</style>
-<div class="gradient-text">INForcast</div>
-"""
-html2 = """
-<style>
-.gradient-text {
-    background: linear-gradient(45deg, #284d74, #d8ad45, #b2d9db, #e16d33);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 28px;
-    font-weight: bold;
-}
-</style><div class="gradient-text">Historic Influenza vaccine data</div>"""
-html3 = """
-<style>
-.gradient-text {
-    background: linear-gradient(45deg, #284d74, #d8ad45, #b2d9db, #e16d33);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 28px;
-    font-weight: bold;
-</style>
-<div class="gradient-text">Influenza vaccine data - 23/24</div>
-"""
-html4 = """
-<style>
-.gradient-text {
-    background: linear-gradient(45deg, #284d74, #d8ad45, #b2d9db, #e16d33);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 28px;
-    font-weight: bold;
-</style>
-<div class="gradient-text">Quick Start Guide</div>
-"""
-# Render the HTML in the Streamlit app
-st.markdown(html, unsafe_allow_html=True)
+def loaddata(url):
+    df = pd.read_csv(url)
+    return df
+
 
 # Define current year globally
 current_year = datetime.datetime.now().year
 
 # You can use columns to further utilize the wide layout
-col1, col2, col3 = st.columns([1, 0.2, 3])
+col1, col2, col3 = st.columns([1, 0.1, 3])
 
 data = None
 with col1:
+    # Render the HTML in the Streamlit app
+    st.markdown(html, unsafe_allow_html=True)
     # Checkbox to load sample data
     if st.checkbox("Load Sample Data"):
         url = "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/inforcast/sampledata/sampledata.csv"
+        data = loaddata(url)
         data = pd.read_csv(url)
         data = process_dataframe(data)
         data = update_location(data)
@@ -100,14 +56,6 @@ if data is not None:
             index=location_counts.index.get_loc(most_frequent_location),
         )
 
-        # Creating a slider
-        selected_year = st.slider(
-            "Select a year",
-            min_value=2000,
-            max_value=current_year,
-            value=(2000, current_year),
-        )
-
         # Filter the DataFrame based on the selected location ID
         filtered_data = data[data["location"] == selected_location]
 
@@ -123,8 +71,11 @@ with col3:
     if data is not None and "df_list" in locals():
         st.markdown(html2, unsafe_allow_html=True)
         plot_age_groups(df_list, df_list[-1]["count"].max())
+
         current_year = datetime.datetime.now().year
         previous_year = int(current_year) - 1
+
+        age_histplot(filtered_data)
 
         st.markdown(html3, unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
@@ -147,41 +98,10 @@ with col3:
             use_column_width=True,
         )
         # Toggle checkbox
-        toggle = st.checkbox(
-            "Forecast. Order. Protect. never overorder again - Quick Start"
-        )
+        toggle = st.checkbox("Quick Start - never overorder again.")
 
         # Check if the toggle is on or off
         if toggle:
             st.markdown(html4, unsafe_allow_html=True)
-            st.markdown("Upload your CSV file or select sample data.")
-            st.markdown(
-                """**Welcome to INForcast**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
-
-    **Ready to get started?** Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
-
-    To prepare your data, download the [SystmOne Report file here and import to SystmOne Clinical Reporting](https://github.com/janduplessis883/project-vaxplanner-360/blob/master/images/VaxPlanner360%20-%20SystmOne%20Search.rpt) and breakdown the results into the following categories: 
-    - `Patient System ID`
-    - `Vaccination Type`
-    - `Event Date`
-    - `Event Location ID`
-    - `Patient Date of Birth`
-
-    Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
-
-    **Important**:
-    >Please **update the format** of the 2 date columns, `Event date` and ` Date of Birth` as follows: 
-    - Open the csv in Excel, select both columns and right click **Format Cells** 
-    - Select CUSTOM and update the date format to `dd-mmm-yyyy`. Note you will need to type this as it is not selectable from the dorp-down list.
-
-    To initiate the prediction, enter your practice's ODE code into the designated 'Practice Code' field and upload your CSV file. Our app will then dynamically illustrate your historical Influenza Vaccination data, emphasizing the figures from the previous year. Based on this, our model will project the quantity of vaccines your practice might need for the upcoming Influenza vaccination season.
-
-    Embrace a smarter approach to vaccination planning with VaxPlanner 360."""
-            )
-        # Create a download button
-        st.download_button(
-            label="Download CSV Template",
-            data=get_download_link("sampledata/csv_template.csv"),
-            file_name="csv_template.csv",
-            mime="text/csv",
-        )
+            st.markdown(quickguide)
+            st.code(guide_code1)

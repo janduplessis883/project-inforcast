@@ -126,6 +126,48 @@ def age_groups(data):
     return [children_ts, under_ts, over_ts, data_ts]
 
 
+def age_histplot(data):
+    children = data[data["age_at_vaccine"] <= 18]
+    over = data[data["age_at_vaccine"] >= 65]
+    under = data[(data["age_at_vaccine"] > 18) & (data["age_at_vaccine"] < 65)]
+
+    children_series = children["age_at_vaccine"]
+    over_series = over["age_at_vaccine"]
+    under_series = under["age_at_vaccine"]
+
+    fig, axes = plt.subplots(
+        1, 3, figsize=(15, 2)
+    )  # Adjusted figsize for better visibility
+
+    # Plot each series in a different subplot
+    sns.histplot(children_series, kde=True, ax=axes[0], color="#d59c0d")
+    axes[0].set_title("Children Age Range")
+
+    sns.histplot(under_series, kde=True, ax=axes[1], color="#d59c0d")
+    axes[1].set_title("18 - 64 yrs Age Range")
+
+    sns.histplot(over_series, kde=True, ax=axes[2], color="#d59c0d")
+    axes[2].set_title("Over 65 Age Range")
+
+    # Customize each plot in the loop
+    for ax in axes:
+        # Remove top, right, and left spines
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+
+        # Add grid
+        ax.yaxis.grid(True, linestyle="--", linewidth=0.5, color="#888888")
+        ax.set_xlabel("Age at vaccination")
+        ax.set_ylabel("Count")
+
+    # Adjust the layout for better spacing
+    plt.tight_layout()
+
+    # Show the plot in Streamlit
+    st.pyplot(fig)
+
+
 def plot_age_groups(children_under_over_list, max_ylim):
     # Create a figure with subplots
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
@@ -145,8 +187,8 @@ def plot_age_groups(children_under_over_list, max_ylim):
         ax.spines["left"].set_visible(False)
         # Set y-axis limits to 0 and 140
         ax.set_ylim(0, max_ylim - 40)
-        plt.xlabel("Date")
-        plt.ylabel("Vaccine Count")
+        ax.set_xlabel("Date")
+        ax.set_ylabel("Vaccine Count")
 
     # Adjust the layout and display the plot
     plt.tight_layout()
