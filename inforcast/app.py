@@ -94,7 +94,7 @@ with col3:
 
     else:
         st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inf_virus.jpg?raw=true",
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-main.png?raw=true",
             use_column_width=True,
         )
         # Toggle checkbox
