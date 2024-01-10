@@ -36,7 +36,7 @@ with col1:
         st.markdown(html4, unsafe_allow_html=True)
         # Reading md file from GitHub
         markdown_content = read_markdown_file(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/markdown/quickstart.md"
+            "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/markdown/quickstart.md"
         )
         st.markdown(markdown_content, unsafe_allow_html=True)
 
