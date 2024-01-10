@@ -36,8 +36,8 @@ with col1:
         st.markdown(html4, unsafe_allow_html=True)
         st.markdown(quickguide)
         st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info1.png?raw=true",
-            width=300,
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/info2.png?raw=true",
+            width=320,
         )
         st.markdown(html5, unsafe_allow_html=True)
         st.code(guide_code1)
