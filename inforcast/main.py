@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import datetime
 import base64
+import requests
 
 from params import *
 from utils import *
@@ -197,6 +198,9 @@ def plot_age_groups(children_under_over_list, max_ylim):
     st.pyplot(fig)
 
 
-def read_markdown_file(markdown_file):
-    with open(markdown_file, "r") as file:
-        return file.read()
+def fetch_markdown_content(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return "Failed to fetch content"

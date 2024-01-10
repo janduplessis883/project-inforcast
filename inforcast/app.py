@@ -35,9 +35,8 @@ with col1:
     if toggle:
         st.markdown(html4, unsafe_allow_html=True)
         # Reading md file from GitHub
-        markdown_content = read_markdown_file(
-            "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/markdown/quickstart.md"
-        )
+        url = "https://raw.githubusercontent.com/janduplessis883/project-inforcast/master/markdown/quickstart.md"
+        markdown_content = fetch_markdown_content(url)
         st.markdown(markdown_content, unsafe_allow_html=True)
 
     # Checkbox to load sample data
