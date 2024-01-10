@@ -5,3 +5,5 @@ seaborn
 pandas
 matplotlib
 colorama
+darts
+ipywidgets
