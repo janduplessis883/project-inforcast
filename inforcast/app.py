@@ -7,7 +7,7 @@ import datetime
 # from streamlit_extras.metric_cards import style_metric_cards
 # from streamlit_extras.stoggle import stoggle
 
-from inforcast.main import *
+from main import *
 
 st.set_page_config(page_title="VaxPlanner 360", page_icon="💉", layout="wide")
 
