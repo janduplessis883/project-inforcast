@@ -58,7 +58,7 @@ html4 = """
     font-size: 28px;
     font-weight: bold;
 </style>
-<div class="gradient-text">Quickstart</div>
+<div class="gradient-text">Quick Start Guide</div>
 """
 # Render the HTML in the Streamlit app
 st.markdown(html, unsafe_allow_html=True)
@@ -143,32 +143,45 @@ with col3:
 
     else:
         st.image(
-            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inf_virus.png?raw=true",
-            caption="INForcast",
+            "https://github.com/janduplessis883/project-inforcast/blob/master/images/inf_virus.jpg?raw=true",
             use_column_width=True,
         )
-        st.markdown(html4, unsafe_allow_html=True)
-        st.markdown("Upload your CSV file or select sample data.")
-        st.markdown(
-            """**Welcome to VaxPlanner 360**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
+        # Toggle checkbox
+        toggle = st.checkbox(
+            "Forecast. Order. Protect. never overorder again - Quick Start"
+        )
 
-**Ready to get started?** Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
+        # Check if the toggle is on or off
+        if toggle:
+            st.markdown(html4, unsafe_allow_html=True)
+            st.markdown("Upload your CSV file or select sample data.")
+            st.markdown(
+                """**Welcome to INForcast**, your tool for forecasting next year's Influenza vaccination needs! Leveraging advanced TimeSeries modeling, our platform delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements. Moreover, we provide a comparative analysis of your current year’s vaccination statistics against the data from previous years, giving you a clearer picture of trends and changes.
 
-To prepare your data, download the [SystmOne Report file here and import to SystmOne Clinical Reporting](https://github.com/janduplessis883/project-vaxplanner-360/blob/master/images/VaxPlanner360%20-%20SystmOne%20Search.rpt) and breakdown the results into the following categories: 
-- `Patient System ID`
-- `Vaccination Type`
-- `Event Date`
-- `Event Location ID`
-- `Patient Date of Birth`
+    **Ready to get started?** Upload your vaccination data, and our model will tailor its predictions to your specific dataset. 
 
-Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
+    To prepare your data, download the [SystmOne Report file here and import to SystmOne Clinical Reporting](https://github.com/janduplessis883/project-vaxplanner-360/blob/master/images/VaxPlanner360%20-%20SystmOne%20Search.rpt) and breakdown the results into the following categories: 
+    - `Patient System ID`
+    - `Vaccination Type`
+    - `Event Date`
+    - `Event Location ID`
+    - `Patient Date of Birth`
 
-**Important**:
->Please **update the format** of the 2 date columns, `Event date` and ` Date of Birth` as follows: 
-- Open the csv in Excel, select both columns and right click **Format Cells** 
-- Select CUSTOM and update the date format to `dd-mmm-yyyy`. Note you will need to type this as it is not selectable from the dorp-down list.
+    Once you export this report to a CSV file, an extra column, `Patient Count`, will automatically be included.
 
-To initiate the prediction, enter your practice's ODE code into the designated 'Practice Code' field and upload your CSV file. Our app will then dynamically illustrate your historical Influenza Vaccination data, emphasizing the figures from the previous year. Based on this, our model will project the quantity of vaccines your practice might need for the upcoming Influenza vaccination season.
+    **Important**:
+    >Please **update the format** of the 2 date columns, `Event date` and ` Date of Birth` as follows: 
+    - Open the csv in Excel, select both columns and right click **Format Cells** 
+    - Select CUSTOM and update the date format to `dd-mmm-yyyy`. Note you will need to type this as it is not selectable from the dorp-down list.
 
-Embrace a smarter approach to vaccination planning with VaxPlanner 360."""
+    To initiate the prediction, enter your practice's ODE code into the designated 'Practice Code' field and upload your CSV file. Our app will then dynamically illustrate your historical Influenza Vaccination data, emphasizing the figures from the previous year. Based on this, our model will project the quantity of vaccines your practice might need for the upcoming Influenza vaccination season.
+
+    Embrace a smarter approach to vaccination planning with VaxPlanner 360."""
+            )
+        # Create a download button
+        st.download_button(
+            label="Download CSV Template",
+            data=get_download_link("sampledata/csv_template.csv"),
+            file_name="csv_template.csv",
+            mime="text/csv",
         )

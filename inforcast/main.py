@@ -3,9 +3,20 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
 import datetime
+import base64
 
 from params import *
 from utils import *
+
+
+# Function to generate a download link
+def get_download_link(file_path):
+    with open(file_path, "rb") as file:
+        # Read file data
+        data = file.read()
+        # Encode the file data into base64
+        b64 = base64.b64encode(data).decode()
+    return f"data:file/csv;base64,{b64}"
 
 
 def update_location(df):
