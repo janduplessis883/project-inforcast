@@ -1,4 +1,4 @@
-[INFocast](https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log.png?raw=true)
+![INFocast](https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log.png?raw=true)
 INForcast will help you forcast your next Influenza vaccine order. Never order too much vaccine again.
 
 This Streamlit app will help you analyse and forcast your influenza vaccine needs. Leveraging advanced TimeSeries modeling, the app delves into historical vaccination records and seasonal patterns, offering you a tailored prediction for your future Influenza vaccine requirements.  
