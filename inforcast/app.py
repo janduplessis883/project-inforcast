@@ -91,6 +91,10 @@ with col3:
         age_histplot(filtered_data)
 
         st.markdown(html3, unsafe_allow_html=True)
+        st.markdown(
+            "Below **Total Influenza Vaccine** given this year. The figure below in green is your total for the previous flu season."
+        )
+        # 3 columns for TOTALS for the year
         col1, col2, col3 = st.columns(3)
 
         col1.metric(
