@@ -72,7 +72,7 @@ if data is not None:
         # Filter the DataFrame based on the selected location ID
         filtered_data = data[data["location"] == selected_location]
 
-        df_list = age_groups(filtered_data)
+        df_list = age_groups(filtered_data, display_years=24)
         counts = count_last_year(filtered_data)
         previous_count = count_previous_year(filtered_data)
 
@@ -85,15 +85,14 @@ with col3:
         st.markdown(html2, unsafe_allow_html=True)
         plot_age_groups(df_list, df_list[-1]["count"].max())
 
-        current_year = datetime.datetime.now().year
-        previous_year = int(current_year) - 1
-
-        age_histplot(filtered_data)
-
         st.markdown(html3, unsafe_allow_html=True)
         st.markdown(
             "Below **Total Influenza Vaccine** given this year. The figure below in green is your total for the previous flu season."
         )
+
+        this_year = age_groups(filtered_data, display_years=2)
+        plot_age_groups(this_year, df_list[-1]["count"].max())
+
         # 3 columns for TOTALS for the year
         col1, col2, col3 = st.columns(3)
 
@@ -108,6 +107,9 @@ with col3:
         col3.metric(
             label="Over 65 yrs", value=str(counts[2]), delta=str(previous_count[2])
         )
+
+        # Age Histogram Plot (need to update filtered data for the last year only)
+        age_histplot(filtered_data)
 
     else:
         st.image(

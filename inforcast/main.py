@@ -36,11 +36,7 @@ def make_dropdown_list(data):
 
 def current_year():
     current_year = datetime.datetime.now().year
-    previous_year = current_year - 1
-    return previous_year, current_year
-
-
-previous_year, current_year = current_year()
+    return int(current_year)
 
 
 def to_timeseries(df, column, time_period="M"):
@@ -78,8 +74,8 @@ def process_dataframe(df):
 
 def count_last_year(df):
     filtered_df = df[
-        (df["date"] > pd.Timestamp(f"{current_year-1}-09-01"))
-        & (df["date"] < pd.Timestamp(f"{current_year}-01-31"))
+        (df["date"] > pd.Timestamp(f"{current_year()-1}-09-01"))
+        & (df["date"] < pd.Timestamp(f"{current_year()}-02-28"))
     ]
     # Count vaccines for each age group
     children_count = filtered_df[filtered_df["age_at_vaccine"] <= 18]["pt_count"].sum()
@@ -93,8 +89,8 @@ def count_last_year(df):
 
 def count_previous_year(df):
     filtered_df = df[
-        (df["date"] > pd.Timestamp(f"{current_year-2}-09-01"))
-        & (df["date"] < pd.Timestamp(f"{current_year-1}-01-31"))
+        (df["date"] > pd.Timestamp(f"{current_year()-2}-09-01"))
+        & (df["date"] < pd.Timestamp(f"{current_year()-1}-02-28"))
     ]
     # Count vaccines for each age group
     children_count = filtered_df[filtered_df["age_at_vaccine"] <= 18]["pt_count"].sum()
@@ -106,15 +102,17 @@ def count_previous_year(df):
     return [children_count, adult_count, senior_count]
 
 
-def age_groups(data):
-    children = data[data["age_at_vaccine"] <= 18]
-    over = data[data["age_at_vaccine"] >= 65]
-    under = data[(data["age_at_vaccine"] > 18) & (data["age_at_vaccine"] < 65)]
-
-    children_ts = to_timeseries(children, "date", "M")
+def age_groups(data, display_years=20):
+    c_year = data[
+        (data["date"] > pd.Timestamp(f"{current_year()-display_years}-02-01"))
+        & (data["date"] < pd.Timestamp(f"{current_year()}-02-28"))
+    ]
+    children = c_year[c_year["age_at_vaccine"] <= 18]
+    over = c_year[c_year["age_at_vaccine"] >= 65]
+    under = c_year[(c_year["age_at_vaccine"] > 18) & (c_year["age_at_vaccine"] < 65)]
 
     # Ensure the 'date' column is in datetime format
-    children_ts["date"] = pd.to_datetime(children_ts["date"])
+    children_ts = to_timeseries(children, "date", "M")
     children_ts.set_index("date", inplace=True)
 
     over_ts = to_timeseries(over, "date", "M")
@@ -127,10 +125,14 @@ def age_groups(data):
     return [children_ts, under_ts, over_ts, data_ts]
 
 
-def age_histplot(data):
-    children = data[data["age_at_vaccine"] <= 18]
-    over = data[data["age_at_vaccine"] >= 65]
-    under = data[(data["age_at_vaccine"] > 18) & (data["age_at_vaccine"] < 65)]
+def age_histplot(df):
+    c_year = df[
+        (df["date"] > pd.Timestamp(f"{current_year()-1}-02-01"))
+        & (df["date"] < pd.Timestamp(f"{current_year()}-01-31"))
+    ]
+    children = c_year[c_year["age_at_vaccine"] <= 18]
+    over = c_year[c_year["age_at_vaccine"] >= 65]
+    under = c_year[(c_year["age_at_vaccine"] > 18) & (c_year["age_at_vaccine"] < 65)]
 
     children_series = children["age_at_vaccine"]
     over_series = over["age_at_vaccine"]
