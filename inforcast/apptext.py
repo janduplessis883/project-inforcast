@@ -36,7 +36,7 @@ html3 = """
     font-size: 30px;
     font-weight: bold;
 </style>
-<div class="gradient-text">Inf vacc Totals - 23/24</div>
+<div class="gradient-text">Influenza vacc Totals - 23/24</div>
 """
 
 
