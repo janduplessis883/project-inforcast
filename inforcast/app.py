@@ -26,7 +26,7 @@ data = None
 with col1:
     # Render the HTML in the Streamlit app
     st.image(
-        "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log.png?raw=true"
+        "https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log2.png?raw=true"
     )
     # Toggle checkbox
     toggle = st.checkbox("Quick Start")

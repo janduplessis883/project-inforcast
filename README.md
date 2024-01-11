@@ -1,4 +1,4 @@
-![INFocast](https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log.png?raw=true)
+![INFocast](https://github.com/janduplessis883/project-inforcast/blob/master/images/inforcast-log2.png?raw=true)
 
 **INForcast** will help you forcast your next Influenza vaccine order. Never order too much vaccine again.
 
